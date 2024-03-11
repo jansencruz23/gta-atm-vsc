@@ -89,7 +89,7 @@ public class DepositForm extends JFrame {
         btnEnter.setBounds(230, 230, 110, 40);
 
         btn1000.setBackground(new Color(102, 102, 102));
-        btn1000.setIcon(new ImageIcon(getClass().getResource("/img/1000.png"))); 
+        btn1000.setIcon(new ImageIcon(getClass().getResource("/img/1000.png")));
         btn1000.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btn1000ActionPerformed(evt);
@@ -113,7 +113,7 @@ public class DepositForm extends JFrame {
         getContentPane().add(lblTitle);
         lblTitle.setBounds(0, 30, 850, 50);
 
-        jLabel1.setIcon(new ImageIcon(getClass().getResource("/img/TA3.jpg")));
+        jLabel1.setIcon(new ImageIcon(getClass().getResource("/img/TA3.jpg"))); 
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 850, 460);
 
@@ -133,7 +133,7 @@ public class DepositForm extends JFrame {
     }
 
     private void btnEnterActionPerformed(ActionEvent evt) {
-        try {
+         try {
             double money = Double.parseDouble(txtDeposit.getText());
             double accountBalance = balanceType.equals("CURRENT") 
                     ? bankAccount.getCurrentBalance() 
@@ -146,23 +146,37 @@ public class DepositForm extends JFrame {
                 bankAccount.setSavingsBalance(accountBalance + money);
             }
             
-            int option = JOptionPane.showConfirmDialog(this, "Do you want another transaction?",
-                    "Deposit Successful", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            
-            if (option == JOptionPane.YES_OPTION) {
-                this.dispose();
-                new MenuForm(bankAccount).setVisible(true);
-            }
-            else {
-                this.dispose();
-                new LoginForm(bankAccount).setVisible(true);
-            }
+            promptReceipt(money);
+            promptNewTransaction();
         } 
         catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Invalid deposit amount.");
         }
     }
 
+    private void promptReceipt(double amount) { 
+        int optionReceipt = JOptionPane.showConfirmDialog(this, "Do you want print receipt?",
+                "Print Receipt", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (optionReceipt == JOptionPane.YES_OPTION) {
+            new ReceiptForm(bankAccount, balanceType, "DEPOSIT", amount).setVisible(true);
+        }
+    }
+    
+    private void promptNewTransaction() {
+        int optionNew = JOptionPane.showConfirmDialog(this, "Do you want another transaction?",
+            "Withdraw Successful", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (optionNew == JOptionPane.YES_OPTION) {
+            this.dispose();
+            new MenuForm(bankAccount).setVisible(true);
+        }
+        else {
+            this.dispose();
+            new LoginForm(bankAccount).setVisible(true);
+        }
+    }
+    
     private void btnCancelActionPerformed(ActionEvent evt) {
         this.dispose();
         new MenuForm(bankAccount).setVisible(true);

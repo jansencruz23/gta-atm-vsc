@@ -1,5 +1,5 @@
 public class BankAccount {
-    private String pinNumber = "1234";
+    private String pinNumber = "123456";
     private double currentBalance = 3000;
     private double savingsBalance = 3000;
 

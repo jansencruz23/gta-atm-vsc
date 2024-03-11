@@ -2,9 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginForm extends JFrame {
     private BankAccount bankAccount;
+    private int tries = 3;
 
     private JButton btnCancel;
     private JButton btnEnter;
@@ -60,7 +63,7 @@ public class LoginForm extends JFrame {
         jLabel1.setBounds(280, 140, 300, 30);
 
         btnCancel.setBackground(new Color(255, 102, 102));
-        btnCancel.setFont(new Font("Pricedown Bl", 0, 18)); 
+        btnCancel.setFont(new Font("Pricedown Bl", 0, 18));
         btnCancel.setForeground(new Color(255, 255, 255));
         btnCancel.setIcon(new ImageIcon(getClass().getResource("/img/cancel.png"))); 
         btnCancel.setMaximumSize(new Dimension(72, 23));
@@ -87,6 +90,11 @@ public class LoginForm extends JFrame {
 
         txtPin.setFont(new Font("Arial Rounded MT Bold", 0, 14)); 
         txtPin.setHorizontalAlignment(JTextField.CENTER);
+        txtPin.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
+                txtPinKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtPin);
         txtPin.setBounds(280, 170, 300, 50);
 
@@ -95,7 +103,7 @@ public class LoginForm extends JFrame {
         jLabel6.setBounds(-30, 280, 320, 180);
 
         jLabel5.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel5.setIcon(new ImageIcon(getClass().getResource("/img/sub.png")));
+        jLabel5.setIcon(new ImageIcon(getClass().getResource("/img/sub.png"))); 
         getContentPane().add(jLabel5);
         jLabel5.setBounds(0, 20, 850, 33);
 
@@ -118,22 +126,38 @@ public class LoginForm extends JFrame {
         jLabel4.setBounds(0, 30, 850, 90);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     private void btnEnterActionPerformed(ActionEvent evt) {
         String password = String.valueOf(txtPin.getPassword());
-        
+
         if (password.equals(bankAccount.getPinNumber())) {
             this.dispose();
             new MenuForm(bankAccount).setVisible(true);
         }
         else {
-            JOptionPane.showMessageDialog(this, "Incorrect PIN. Try again.");
+            tries--;
+            if (tries > 0) {
+                JOptionPane.showMessageDialog(this, "Incorrect PIN. Try again.");
+                txtPin.setText("");
+            }
+            else {
+                dispose();
+            }
         }
     }
 
     private void btnCancelActionPerformed(ActionEvent evt) {
         this.dispose();
+    }
+
+    private void txtPinKeyTyped(KeyEvent evt) {
+        String password = String.valueOf(txtPin.getPassword());
+        char c = evt.getKeyChar();
+        
+        if (!Character.isDigit(c) || password.length() >= 6) {
+            evt.consume();
+        }
     }
 
     public static void main(String args[]) {

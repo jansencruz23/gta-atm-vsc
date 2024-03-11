@@ -27,9 +27,9 @@ public class WithdrawForm extends JFrame {
 
     private void initComponents() {
 
-        txtWithdraw = new javax.swing.JTextField();
-        btnCancel = new javax.swing.JButton();
-        btn3000 = new javax.swing.JButton();
+        txtWithdraw = new JTextField();
+        btnCancel = new JButton();
+        btn3000 = new JButton();
         btnClear = new JButton();
         btnEnter = new JButton();
         btn1000 = new JButton();
@@ -49,7 +49,7 @@ public class WithdrawForm extends JFrame {
         txtWithdraw.setBounds(281, 136, 300, 50);
 
         btnCancel.setBackground(new Color(255, 102, 102));
-        btnCancel.setIcon(new ImageIcon(getClass().getResource("/img/cancel.png")));
+        btnCancel.setIcon(new ImageIcon(getClass().getResource("/img/cancel.png"))); 
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -144,17 +144,8 @@ public class WithdrawForm extends JFrame {
                     bankAccount.setSavingsBalance(accountBalance - money);
                 }
                 
-                int option = JOptionPane.showConfirmDialog(this, "Do you want another transaction?",
-                    "Withdraw Successful", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            
-                if (option == JOptionPane.YES_OPTION) {
-                    this.dispose();
-                    new MenuForm(bankAccount).setVisible(true);
-                }
-                else {
-                    this.dispose();
-                    new LoginForm(bankAccount).setVisible(true);
-                }
+                promptReceipt(money);
+                promptNewTransaction();
             } 
             else {
                 JOptionPane.showMessageDialog(this, "Balance is insufficient.");
@@ -165,6 +156,29 @@ public class WithdrawForm extends JFrame {
         }
     }
 
+    private void promptReceipt(double amount) {
+        int optionReceipt = JOptionPane.showConfirmDialog(this, "Do you want to print a receipt?",
+                "Print Receipt", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (optionReceipt == JOptionPane.YES_OPTION) {
+            new ReceiptForm(bankAccount, balanceType, "WITHDRAW", amount).setVisible(true);
+        }
+    }
+    
+    private void promptNewTransaction() {
+        int optionNew = JOptionPane.showConfirmDialog(this, "Do you want another transaction?",
+            "Withdraw Successful", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (optionNew == JOptionPane.YES_OPTION) {
+            this.dispose();
+            new MenuForm(bankAccount).setVisible(true);
+        }
+        else {
+            this.dispose();
+            new LoginForm(bankAccount).setVisible(true);
+        }
+    }
+    
     private void btn1000ActionPerformed(ActionEvent evt) {
         txtWithdraw.setText("1000");
     }

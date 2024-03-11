@@ -1,18 +1,17 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AccountForm extends JFrame {
     private BankAccount bankAccount;
     private String action;
-    
+
     private JButton btnBack;
     private JButton btnCancel;
     private JButton btnCurrent;
     private JButton btnSavings;
     private JLabel jLabel1;
-
+    
     public AccountForm(BankAccount bankAccount, String action) {
         initComponents();
         setLocationRelativeTo(null);
@@ -30,14 +29,14 @@ public class AccountForm extends JFrame {
         jLabel1 = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new Dimension(850, 460));
-        setMinimumSize(new Dimension(850, 460));
-        setPreferredSize(new Dimension(850, 460));
+        setMaximumSize(new java.awt.Dimension(850, 460));
+        setMinimumSize(new java.awt.Dimension(850, 460));
+        setPreferredSize(new java.awt.Dimension(850, 460));
         setResizable(false);
-        setSize(new Dimension(850, 460));
+        setSize(new java.awt.Dimension(850, 460));
         getContentPane().setLayout(null);
 
-        btnSavings.setIcon(new ImageIcon(getClass().getResource("/img/savings.png"))); 
+        btnSavings.setIcon(new ImageIcon(getClass().getResource("/img/savings.png")));
         btnSavings.setText("   ");
         btnSavings.setHorizontalAlignment(SwingConstants.LEFT);
         btnSavings.addActionListener(new ActionListener() {
@@ -48,7 +47,7 @@ public class AccountForm extends JFrame {
         getContentPane().add(btnSavings);
         btnSavings.setBounds(90, 210, 510, 50);
 
-        btnCurrent.setIcon(new ImageIcon(getClass().getResource("/img/current.png"))); 
+        btnCurrent.setIcon(new ImageIcon(getClass().getResource("/img/current.png")));
         btnCurrent.setText("   ");
         btnCurrent.setHorizontalAlignment(SwingConstants.LEFT);
         btnCurrent.addActionListener(new ActionListener() {
@@ -59,8 +58,8 @@ public class AccountForm extends JFrame {
         getContentPane().add(btnCurrent);
         btnCurrent.setBounds(90, 130, 510, 50);
 
-        btnCancel.setBackground(new Color(255, 102, 102));
-        btnCancel.setForeground(new Color(255, 102, 102));
+        btnCancel.setBackground(new java.awt.Color(255, 102, 102));
+        btnCancel.setForeground(new java.awt.Color(255, 102, 102));
         btnCancel.setIcon(new ImageIcon(getClass().getResource("/img/cancel.png"))); 
         btnCancel.setToolTipText("");
         btnCancel.addActionListener(new ActionListener() {
@@ -71,11 +70,11 @@ public class AccountForm extends JFrame {
         getContentPane().add(btnCancel);
         btnCancel.setBounds(640, 330, 120, 40);
 
-        btnBack.setBackground(new Color(204, 204, 204));
+        btnBack.setBackground(new java.awt.Color(204, 204, 204));
         btnBack.setIcon(new ImageIcon(getClass().getResource("/img/back.png"))); 
-        btnBack.setMaximumSize(new Dimension(75, 23));
-        btnBack.setMinimumSize(new Dimension(75, 23));
-        btnBack.setPreferredSize(new Dimension(75, 23));
+        btnBack.setMaximumSize(new java.awt.Dimension(75, 23));
+        btnBack.setMinimumSize(new java.awt.Dimension(75, 23));
+        btnBack.setPreferredSize(new java.awt.Dimension(75, 23));
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -105,7 +104,7 @@ public class AccountForm extends JFrame {
         openForm("CURRENT");
     }
 
-    private void btnSavingsActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnSavingsActionPerformed(ActionEvent evt) {
         openForm("SAVINGS");
     }
 

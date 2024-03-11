@@ -54,11 +54,12 @@ public class BalanceForm extends JFrame {
 
         txtBalance.setEditable(false);
         txtBalance.setFont(new Font("Pricedown Bl", 0, 36)); 
+        txtBalance.setHorizontalAlignment(JTextField.CENTER);
         getContentPane().add(txtBalance);
         txtBalance.setBounds(281, 136, 300, 50);
 
         btnBack.setBackground(new Color(204, 204, 204));
-        btnBack.setIcon(new ImageIcon(getClass().getResource("/img/back.png"))); 
+        btnBack.setIcon(new ImageIcon(getClass().getResource("/img/back.png")));
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnBackActionPerformed(evt);

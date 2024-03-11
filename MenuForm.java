@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class MenuForm extends JFrame {
     private BankAccount bankAccount;
-
+    
     private JButton btnBalance;
     private JButton btnCancel;
     private JButton btnDeposit;
@@ -16,7 +16,7 @@ public class MenuForm extends JFrame {
     private JLabel jLabel3;
     private JLabel jLabel4;
     private JLabel jLabel5;
-    
+
     public MenuForm(BankAccount bankAccount) {
         initComponents();
         setLocationRelativeTo(null);
@@ -61,7 +61,7 @@ public class MenuForm extends JFrame {
         getContentPane().add(btnDeposit);
         btnDeposit.setBounds(110, 110, 180, 180);
 
-        btnWithdraw.setIcon(new ImageIcon(getClass().getResource("/img/www.png"))); 
+        btnWithdraw.setIcon(new ImageIcon(getClass().getResource("/img/www.png")));
         btnWithdraw.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
         btnWithdraw.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -72,7 +72,7 @@ public class MenuForm extends JFrame {
         btnWithdraw.setBounds(345, 110, 180, 180);
 
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel1.setIcon(new ImageIcon(getClass().getResource("/img/deposit.png"))); 
+        jLabel1.setIcon(new ImageIcon(getClass().getResource("/img/deposit.png")));
         getContentPane().add(jLabel1);
         jLabel1.setBounds(110, 310, 180, 20);
 
